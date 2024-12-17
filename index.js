@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const { adminProtected, customerProtected } = require("./middlewares/protected.middleware")
@@ -18,10 +19,11 @@ app.use(express.static("dist"))
 app.use("/api/admin", adminProtected, require("./routes/admin.routes"))
 app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/public", require("./routes/public.routes"))
-app.use("/api/customer",customerProtected, require("./routes/customer.routes"))
+app.use("/api/customer", customerProtected, require("./routes/customer.routes"))
 
-app.use("*", (req,res)=>{
-    res.status(404).json({message: "Resource not found"})
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+    //res.status(404).json({message: "Resource not found"})
 })
 
 mongoose.connect(process.env.MONGO_URL)
