@@ -3,7 +3,7 @@ const { registerAdmin, loginAdmin, logoutAdmin, registerUser, loginUser, logoutU
 const router=require("express").Router()
 
 router 
-// .post("/admin/register",registerAdmin)
+.post("/admin/register",registerAdmin)
 .post("/admin/login",loginAdmin)
 .post("/admin/logout",logoutAdmin)
 .post("/customer/register",registerUser)
